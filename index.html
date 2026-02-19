@@ -3,46 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAKASCINIZ | Güvenilir Roblox Takas Platformu</title>
+    <title>TAKASCINIZ | Roblox Takas Platformu</title>
+    <!-- Harici Stil Dosyası -->
     <link rel="stylesheet" href="style.css">
-    <!-- Fontlar ve İkonlar -->
+    <!-- Fontlar ve İkon Kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Üst Bar (Navbar) -->
+    <!-- Üst Bar -->
     <nav class="navbar">
-        <div class="nav-left">
-            <div class="logo-svg">
-                <svg width="32" height="32" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="#22c55e" stroke-width="8" />
-                    <path d="M30 50 L45 65 L70 35" fill="none" stroke="#22c55e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo-svg">
+                    <svg width="32" height="32" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#22c55e" stroke-width="8" />
+                        <path d="M30 50 L45 65 L70 35" fill="none" stroke="#22c55e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h1 class="nav-title uppercase italic">TAKASCINIZ</h1>
             </div>
-            <h1 class="nav-title">TAKASCINIZ</h1>
-        </div>
-        <div class="nav-right">
-            <button id="menu-toggle" class="icon-btn"><i class="fas fa-ellipsis-v"></i></button>
-            <div id="dropdown-menu" class="dropdown hidden">
-                <a href="#" class="nav-link" data-page="home"><i class="fas fa-home text-green"></i> ANASAYFA</a>
-                <a href="#" class="nav-link" data-page="traders"><i class="fas fa-users text-green"></i> TAKASCILAR</a>
-                <a href="#" class="nav-link" data-page="requirements"><i class="fas fa-info-circle text-green"></i> GEREKSİNİMLER</a>
+            <div class="nav-right">
+                <button id="menu-toggle" class="icon-btn"><i class="fas fa-ellipsis-v"></i></button>
+                <div id="dropdown-menu" class="dropdown hidden">
+                    <button class="nav-link-btn active" onclick="navigateTo('home')"><i class="fas fa-home"></i> ANASAYFA</button>
+                    <button class="nav-link-btn" onclick="navigateTo('traders')"><i class="fas fa-users"></i> TAKASCILAR</button>
+                    <button class="nav-link-btn" onclick="navigateTo('requirements')"><i class="fas fa-info-circle"></i> GEREKSİNİMLER</button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Ana İçerik -->
-    <main id="content" class="container">
-        <!-- Sayfalar JS ile buraya yüklenecek -->
+    <!-- Dinamik İçerik Alanı -->
+    <main id="content-area" class="container">
+        <!-- JS buraya içerik basacak -->
     </main>
 
-    <!-- Alt Navigasyon Bar (Mobil) -->
+    <!-- Mobil Alt Navigasyon -->
     <div class="bottom-nav">
-        <button class="nav-link" data-page="home"><i class="fas fa-home"></i></button>
-        <button class="nav-link" data-page="traders"><i class="fas fa-users"></i></button>
-        <button class="nav-link" data-page="requirements"><i class="fas fa-info-circle"></i></button>
+        <button class="m-nav-link active" onclick="navigateTo('home')"><i class="fas fa-home"></i></button>
+        <button class="m-nav-link" onclick="navigateTo('traders')"><i class="fas fa-users"></i></button>
+        <button class="m-nav-link" onclick="navigateTo('requirements')"><i class="fas fa-info-circle"></i></button>
     </div>
 
+    <!-- JavaScript Dosyası -->
     <script src="script.js"></script>
 </body>
 </html>
