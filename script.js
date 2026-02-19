@@ -1,6 +1,7 @@
-const tradersData = [
+// Veri Modeli
+const traders = [
     {
-        name: "Erdem",
+        name: "ERDEM",
         instagram: "gagtradesab",
         instaUrl: "https://www.instagram.com/gagtradesab",
         pfp: "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/public/inputs/818f0a1c-9216-43f1-b3b3-0599c94b7999/b6348ef5-0453-4ca2-a38f-a9b0c74d6c62.png",
@@ -10,24 +11,31 @@ const tradersData = [
     }
 ];
 
-const contentDiv = document.getElementById('content');
-const menuToggle = document.getElementById('menu-toggle');
-const dropdownMenu = document.getElementById('dropdown-menu');
+const mainContent = document.getElementById('mainContent');
+const dropdownMenu = document.getElementById('dropdownMenu');
 
-// Menü Kontrolü
-menuToggle.addEventListener('click', () => {
+function toggleMenu() {
     dropdownMenu.classList.toggle('hidden');
-});
+}
 
-// Sayfa Değiştirme
+// Menü dışına tıklandığında kapatma
+window.onclick = function(event) {
+    if (!event.target.matches('.fa-ellipsis-v') && !event.target.matches('button')) {
+        dropdownMenu.classList.add('hidden');
+    }
+}
+
 function navigateTo(page) {
     dropdownMenu.classList.add('hidden');
     window.scrollTo(0, 0);
     
-    // Aktif butonu güncelle
-    document.querySelectorAll('.nav-link').forEach(link => {
-        if(link.dataset.page === page) link.classList.add('active');
-        else link.classList.remove('active');
+    // Alt navigasyon butonlarını güncelle
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        if(btn.dataset.page === page) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
     });
 
     if (page === 'home') renderHome();
@@ -36,102 +44,152 @@ function navigateTo(page) {
 }
 
 function renderHome() {
-    contentDiv.innerHTML = `
-        <div class="animate-up">
-            <div class="home-header">
-                <h1>Hoşgeldiniz</h1>
-                <div class="line" style="height:4px; width:80px; background:var(--green); margin:15px auto; border-radius:10px;"></div>
-            </div>
-            <div class="welcome-card">
-                <p>Burası roblox platformunda takas yapan kişilerin bulunduğu platformdur. 
-                Bu platform sayesinde kimle takas yapabileceğinizi kolayca öğrenebilirsiniz. 
-                Daha fazla bilgi almak için sağ üstteki üç noktaya tıklayın.</p>
-            </div>
+    mainContent.innerHTML = `
+        <div class="animate-fade-in space-y-12 text-center">
+            <header class="py-10">
+                <h1 class="text-5xl md:text-6xl font-black mb-4 custom-gradient-text italic uppercase">Hoşgeldiniz</h1>
+                <div class="h-1.5 w-24 bg-green-500 mx-auto rounded-full shadow-[0_0_15px_rgba(34,197,94,0.6)]"></div>
+            </header>
+            <section class="glass-card p-8 rounded-[2rem] text-left relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
+                <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
+                    Burası roblox platformunda takas yapan kişilerin bulunduğu platformdur. 
+                    Bu platform sayesinde kimle takas yapabileceğinizi kolayca öğrenebilirsiniz. 
+                    Daha fazla bilgi almak için sağ üstteki üç noktaya tıklayın.
+                </p>
+            </section>
         </div>
     `;
 }
 
 function renderTraders() {
-    let tradersHtml = `<h2 class="page-title italic font-black" style="margin-bottom:30px;"><i class="fas fa-users text-green"></i> TAKASCILAR</h2>`;
-    
-    tradersData.forEach(t => {
-        tradersHtml += `
-            <div class="trader-card">
-                <div class="trader-pfp-box">
-                    <img src="${t.pfp}" class="pfp-img">
-                    <div class="verified-badge"><i class="fas fa-check"></i></div>
-                </div>
-                <div class="trader-info">
-                    <div class="rank-badge">${t.rank}</div>
-                    <h3 class="trader-name">${t.name}</h3>
-                    <a href="${t.instaUrl}" target="_blank" class="trader-insta">
-                        <i class="fab fa-instagram"></i> INSTAGRAM: @${t.instagram}
-                    </a>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label">TAKAS YAPTIGI OYUNLAR</div>
-                            <div style="font-size:10px; color:#ccc;">${t.games.join(' ')}</div>
+    let tradersHTML = `
+        <div class="animate-fade-in">
+            <h2 class="text-3xl font-black mb-8 flex items-center gap-3 italic uppercase text-white">
+                <i class="fas fa-users text-green-500"></i> TAKASCILAR
+            </h2>
+    `;
+
+    traders.forEach(t => {
+        tradersHTML += `
+            <div class="glass-card rounded-[2.5rem] border-2 border-green-500/20 overflow-hidden flex flex-col md:flex-row hover:border-green-500/40 transition-all duration-300 mb-6">
+                <div class="md:w-56 bg-[#1f2329] flex items-center justify-center p-8 border-b md:border-b-0 md:border-r border-white/5">
+                    <div class="relative">
+                        <img src="${t.pfp}" class="w-36 h-36 rounded-full border-4 border-green-500 object-cover shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                        <div class="absolute -bottom-1 -right-1 bg-green-500 p-2 rounded-full ring-4 ring-[#1f2329]">
+                            <i class="fas fa-check text-white text-[10px]"></i>
                         </div>
-                        <div class="info-item">
-                            <div class="info-label">PROOF SAYISI</div>
-                            <div style="font-size:24px; font-weight:900;">${t.proofs}</div>
+                    </div>
+                </div>
+
+                <div class="flex-1 p-8 space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-3xl font-black text-white mb-1 uppercase tracking-tight">${t.name}</h3>
+                            <a href="${t.instaUrl}" target="_blank" class="text-green-500 flex items-center gap-2 hover:text-green-400 text-xs font-bold bg-green-500/5 px-3 py-1 rounded-full w-fit transition-colors">
+                                <i class="fab fa-instagram"></i> INSTAGRAM: @${t.instagram}
+                            </a>
+                        </div>
+                        <div class="bg-green-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20">
+                            ${t.rank}
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="bg-[#0f1115] p-4 rounded-2xl border border-white/5">
+                            <div class="text-gray-500 text-[9px] font-black mb-2 flex items-center gap-2 uppercase tracking-widest">
+                                <i class="fas fa-gamepad text-green-500"></i> TAKAS YAPTIGI OYUNLAR
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                ${t.games.map(game => `<span class="text-[10px] font-bold bg-white/5 px-2 py-1 rounded text-gray-300 border border-white/5">${game}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="bg-[#0f1115] p-4 rounded-2xl border border-white/5 flex flex-col justify-center">
+                            <div class="text-gray-500 text-[9px] font-black mb-1 uppercase tracking-widest">PROOF SAYISI</div>
+                            <div class="text-3xl font-black text-white tracking-tighter">${t.proofs}</div>
                         </div>
                     </div>
                 </div>
             </div>
         `;
     });
-    contentDiv.innerHTML = tradersHtml;
+
+    tradersHTML += `</div>`;
+    mainContent.innerHTML = tradersHTML;
 }
 
 function renderRequirements() {
-    contentDiv.innerHTML = `
-        <div class="req-container">
-            <div class="insta-header">
-                <div class="insta-icon-box"><i class="fab fa-instagram fa-2x"></i></div>
-                <div>
-                    <div style="font-size:10px; font-weight:900; color:var(--green); letter-spacing:2px;">BAŞVURU HATTI</div>
-                    <a href="https://www.instagram.com/kami1enel" target="_blank" style="color:white; text-decoration:none; font-size:24px; font-weight:900;">@kami1enel</a>
+    mainContent.innerHTML = `
+        <div class="animate-fade-in space-y-8">
+            <h2 class="text-3xl font-black mb-2 flex items-center gap-3 italic text-white uppercase">
+                <i class="fas fa-award text-green-500"></i> GEREKSİNİMLER
+            </h2>
+
+            <div class="bg-gradient-to-br from-green-500/10 to-[#1a1d23] p-8 rounded-[2.5rem] border border-green-500/20 shadow-2xl">
+                <div class="flex items-center gap-5 mb-6">
+                    <div class="bg-green-500 p-3 rounded-2xl shadow-lg shadow-green-500/30 text-black">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-green-500 font-black uppercase tracking-widest">BAŞVURU HATTI</p>
+                        <a href="https://www.instagram.com/kami1enel" target="_blank" class="text-2xl font-black text-white hover:text-green-500 transition-colors">@kami1enel</a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="p-5 bg-white/5 rounded-2xl border border-white/5">
+                        <p class="text-gray-200 font-bold mb-4 italic">Merhaba, sizi yeni açacağım çoğu takasçının bulunacağı sitemde yer almak istiyorum. Kabul ediyorsanız lütfen bunları eksiksiz yapın:</p>
+                        <ul class="space-y-3 text-sm text-gray-400">
+                            <li><span class="text-green-500 font-black">01.</span> Aktif olduğunuz tüm platformların linki (tiktok insta vb)</li>
+                            <li><span class="text-green-500 font-black">02.</span> En büyük proof videonuzun linki</li>
+                            <li><span class="text-green-500 font-black">03.</span> Aktif proof sayınız</li>
+                            <li><span class="text-green-500 font-black">04.</span> Takas yaptığınız oyunlar</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-5 bg-green-500/10 rounded-2xl border border-green-500/20 text-center font-black text-green-400 text-lg italic shadow-inner">
+                        “Eğer şartları kabul ediyorsanız üstteki instagramdan bana ulaşabilirsiniz.”
+                    </div>
+
+                    <div class="flex items-center gap-3 text-red-500 font-black text-[10px] uppercase tracking-wider bg-red-500/10 p-3 rounded-xl border border-red-500/20">
+                        <i class="fas fa-exclamation-triangle text-base"></i> SİTEYE EKLENMEK İÇİN EN AZ 15 PROOFUNUZUN OLMASI LAZIM.
+                    </div>
+
+                    <div class="bg-[#0f1115] p-6 rounded-3xl border border-white/5">
+                        <h4 class="font-black text-white text-xl mb-4 border-b border-white/5 pb-3 italic uppercase">RÜTBELENDİRMELER</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl text-xs hover:bg-white/10 transition-colors">
+                                <span class="font-black text-green-500 uppercase">15 PROOF</span>
+                                <span class="font-bold text-white uppercase italic">"Çaylak Takasçı" Rütbesi</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl text-xs hover:bg-white/10 transition-colors">
+                                <span class="font-black text-green-500 uppercase">35 PROOF</span>
+                                <span class="font-bold text-white uppercase italic">"Bilge Takasçı" Rütbesi</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-green-500/10 rounded-xl text-xs ring-1 ring-green-500/30">
+                                <span class="font-black text-green-500 uppercase">50 PROOF</span>
+                                <span class="font-bold text-green-400 uppercase italic">"Usta Takasçı" Rütbesi</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl text-xs hover:bg-white/10 transition-colors">
+                                <span class="font-black text-green-500 uppercase">85 PROOF</span>
+                                <span class="font-bold text-white uppercase italic">"Efsane Takasçı" Rütbesi</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl text-xs hover:bg-white/10 transition-colors">
+                                <span class="font-black text-green-500 uppercase">100+ PROOF</span>
+                                <span class="font-bold text-white uppercase italic">"Ölümsüz Takasçı" Rütbesi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-green-500 font-black text-2xl italic tracking-tighter">- Shmirtz</p>
+                    </div>
                 </div>
             </div>
-            
-            <p style="font-weight:bold; margin-bottom:20px;">Merhaba, sizi yeni açacağım çoğu takasçının bulunacağı sitemde yer almak istiyorum. Kabul ediyorsanız lütfen bunları eksiksiz yapın:</p>
-            
-            <ul style="list-style:none; color:var(--text-gray); font-size:14px; margin-bottom:25px;">
-                <li style="margin-bottom:10px;"><span class="text-green">•</span> Aktif olduğunuz tüm platformların linki (tiktok insta vb)</li>
-                <li style="margin-bottom:10px;"><span class="text-green">•</span> En büyük proof videonuzun linki</li>
-                <li style="margin-bottom:10px;"><span class="text-green">•</span> Aktif proof sayınız</li>
-                <li style="margin-bottom:10px;"><span class="text-green">•</span> Takas yaptığınız oyunlar</li>
-            </ul>
-
-            <div style="background:rgba(34, 197, 94, 0.1); padding:20px; border-radius:15px; text-align:center; font-weight:900; font-style:italic; border:1px solid rgba(34,197,94,0.2);">
-                “Eğer şartları kabul ediyorsanız üstteki instagramdan bana ulaşabilirsiniz.”
-            </div>
-
-            <div class="alert-box"><i class="fas fa-exclamation-triangle"></i> Siteye eklenmek için en az 15 proofunuzun olması lazım.</div>
-
-            <div class="rank-list">
-                <h4 style="font-weight:900; font-style:italic; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:10px;">RÜTBELENDİRMELER</h4>
-                <div class="rank-row"><span>15 Proof</span><span>"Çaylak Takasçı" Rütbesi</span></div>
-                <div class="rank-row"><span>35 Proof</span><span>"Bilge Takasçı" Rütbesi</span></div>
-                <div class="rank-row"><span>50 Proof</span><span>"Usta Takasçı" Rütbesi</span></div>
-                <div class="rank-row"><span>85 Proof</span><span>"Efsane Takasçı" Rütbesi</span></div>
-                <div class="rank-row" style="border:none;"><span>100+ Proof</span><span>"Ölümsüz Takasçı" Rütbesi</span></div>
-            </div>
-
-            <div class="final-shmirtz" style="margin-top:20px;">- Shmirtz</div>
         </div>
     `;
 }
 
-// Navigasyon Olay Dinleyicileri
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        navigateTo(link.dataset.page);
-    });
-});
-
-// İlk açılış
-window.onload = () => renderHome();
+// Başlangıç
+navigateTo('home');
 
