@@ -4,49 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAKASCINIZ | Roblox Takas Platformu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome İkonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Harici Stil Dosyası -->
     <link rel="stylesheet" href="style.css">
-    <!-- Fontlar ve İkon Kütüphanesi -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="min-h-screen">
 
-    <!-- Üst Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-left">
-                <div class="logo-svg">
-                    <svg width="32" height="32" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="#22c55e" stroke-width="8" />
-                        <path d="M30 50 L45 65 L70 35" fill="none" stroke="#22c55e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <h1 class="nav-title uppercase italic">TAKASCINIZ</h1>
-            </div>
-            <div class="nav-right">
-                <button id="menu-toggle" class="icon-btn"><i class="fas fa-ellipsis-v"></i></button>
-                <div id="dropdown-menu" class="dropdown hidden">
-                    <button class="nav-link-btn active" onclick="navigateTo('home')"><i class="fas fa-home"></i> ANASAYFA</button>
-                    <button class="nav-link-btn" onclick="navigateTo('traders')"><i class="fas fa-users"></i> TAKASCILAR</button>
-                    <button class="nav-link-btn" onclick="navigateTo('requirements')"><i class="fas fa-info-circle"></i> GEREKSİNİMLER</button>
-                </div>
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full h-16 nav-blur border-b border-white/5 z-50 px-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <svg width="32" height="32" viewBox="0 0 100 100" class="drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#22c55e" stroke-width="8" />
+                <path d="M30 50 L45 65 L70 35" fill="none" stroke="#22c55e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="font-black text-xl tracking-tighter italic uppercase text-white">TAKASCINIZ</span>
+        </div>
+
+        <div class="relative">
+            <button onclick="toggleMenu()" class="p-2 hover:bg-white/5 rounded-full transition-colors active:scale-90 text-white">
+                <i class="fas fa-ellipsis-v text-xl"></i>
+            </button>
+            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-[#1a1d23] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+                <button onclick="navigateTo('home')" class="w-full flex items-center gap-3 px-4 py-4 hover:bg-green-500/10 transition-colors text-left font-bold border-b border-white/5 text-white">
+                    <i class="fas fa-home text-green-500 w-5"></i> ANASAYFA
+                </button>
+                <button onclick="navigateTo('traders')" class="w-full flex items-center gap-3 px-4 py-4 hover:bg-green-500/10 transition-colors text-left font-bold border-b border-white/5 text-white">
+                    <i class="fas fa-users text-green-500 w-5"></i> TAKASCILAR
+                </button>
+                <button onclick="navigateTo('requirements')" class="w-full flex items-center gap-3 px-4 py-4 hover:bg-green-500/10 transition-colors text-left font-bold text-white">
+                    <i class="fas fa-info-circle text-green-500 w-5"></i> GEREKSİNİMLER
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Dinamik İçerik Alanı -->
-    <main id="content-area" class="container">
-        <!-- JS buraya içerik basacak -->
+    <!-- İçerik Alanı -->
+    <main id="mainContent" class="pt-24 pb-32 px-6 max-w-4xl mx-auto">
+        <!-- JavaScript içeriği buraya yükleyecek -->
     </main>
 
-    <!-- Mobil Alt Navigasyon -->
-    <div class="bottom-nav">
-        <button class="m-nav-link active" onclick="navigateTo('home')"><i class="fas fa-home"></i></button>
-        <button class="m-nav-link" onclick="navigateTo('traders')"><i class="fas fa-users"></i></button>
-        <button class="m-nav-link" onclick="navigateTo('requirements')"><i class="fas fa-info-circle"></i></button>
+    <!-- Alt Menü (Mobil) -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#1a1d23]/90 backdrop-blur-xl border border-white/10 px-8 py-4 rounded-[2rem] flex gap-10 shadow-2xl z-40">
+        <button onclick="navigateTo('home')" class="nav-btn transition-all duration-300 text-gray-500" data-page="home">
+            <i class="fas fa-home text-2xl"></i>
+        </button>
+        <button onclick="navigateTo('traders')" class="nav-btn transition-all duration-300 text-gray-500" data-page="traders">
+            <i class="fas fa-users text-2xl"></i>
+        </button>
+        <button onclick="navigateTo('requirements')" class="nav-btn transition-all duration-300 text-gray-500" data-page="requirements">
+            <i class="fas fa-info-circle text-2xl"></i>
+        </button>
     </div>
 
-    <!-- JavaScript Dosyası -->
+    <!-- Harici Script Dosyası -->
     <script src="script.js"></script>
 </body>
 </html>
