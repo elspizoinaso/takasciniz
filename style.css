@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAKASCINIZ | Güvenilir Roblox Takas Platformu</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fontlar ve İkonlar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Üst Bar (Navbar) -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo-svg">
+                <svg width="32" height="32" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#22c55e" stroke-width="8" />
+                    <path d="M30 50 L45 65 L70 35" fill="none" stroke="#22c55e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <h1 class="nav-title">TAKASCINIZ</h1>
+        </div>
+        <div class="nav-right">
+            <button id="menu-toggle" class="icon-btn"><i class="fas fa-ellipsis-v"></i></button>
+            <div id="dropdown-menu" class="dropdown hidden">
+                <a href="#" class="nav-link" data-page="home"><i class="fas fa-home text-green"></i> ANASAYFA</a>
+                <a href="#" class="nav-link" data-page="traders"><i class="fas fa-users text-green"></i> TAKASCILAR</a>
+                <a href="#" class="nav-link" data-page="requirements"><i class="fas fa-info-circle text-green"></i> GEREKSİNİMLER</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <main id="content" class="container">
+        <!-- Sayfalar JS ile buraya yüklenecek -->
+    </main>
+
+    <!-- Alt Navigasyon Bar (Mobil) -->
+    <div class="bottom-nav">
+        <button class="nav-link" data-page="home"><i class="fas fa-home"></i></button>
+        <button class="nav-link" data-page="traders"><i class="fas fa-users"></i></button>
+        <button class="nav-link" data-page="requirements"><i class="fas fa-info-circle"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
