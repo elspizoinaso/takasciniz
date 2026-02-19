@@ -4,7 +4,7 @@ const traders = [
         name: "ERDEM",
         instagram: "gagtradesab",
         instaUrl: "https://www.instagram.com/gagtradesab",
-        pfp: "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/public/inputs/818f0a1c-9216-43f1-b3b3-0599c94b7999/b6348ef5-0453-4ca2-a38f-a9b0c74d6c62.png",
+        pfp: "IMG_0206.jpeg",
         games: ["#StealABrainrot", "#EscapeTsunamiForBrainrots", "#MurderMystery2"],
         proofs: 50,
         rank: "Usta Takasçı 💪"
